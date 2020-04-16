@@ -11,7 +11,10 @@ import {
     NavbarHeading
 } from "@blueprintjs/core";
 
+
+// declare HomePage class
 export default class HomePage extends Component {
+  // set prop-types
   static propTypes = {
     user: PropTypes.shape({
       name: PropTypes.string,
@@ -19,14 +22,15 @@ export default class HomePage extends Component {
       _id: PropTypes.string
     })
   };
-
+  // set state
   state = {
     user: {},
     error: null,
     authenticated: false
   };
-
+  
   componentDidMount() {
+    // use axios to get login status from auth server
     const options = {
       credentials: "include",
       headers: {
@@ -53,7 +57,7 @@ export default class HomePage extends Component {
         });
       });
   }
-
+  // render header and body, passing in the athenticated status and the logout function.
   render() {
     const { authenticated } = this.state;
     return (

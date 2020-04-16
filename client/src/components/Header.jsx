@@ -1,3 +1,4 @@
+// import modules
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -10,12 +11,14 @@ import {
     NavbarHeading
 } from "@blueprintjs/core";
 
+// declare header component as a class
 export default class Header extends Component {
   static propTypes = {
     authenticated: PropTypes.bool.isRequired
   };
-
+  // render the header using Blueprint components.
   render() {
+    // grab authentication status from property passed to the component
     const { authenticated } = this.props;
     return (
       <div>
