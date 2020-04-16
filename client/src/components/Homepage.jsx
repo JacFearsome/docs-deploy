@@ -32,7 +32,6 @@ export default class HomePage extends Component {
   componentDidMount() {
     // use axios to get login status from auth server
     const options = {
-      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

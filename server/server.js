@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const port = 4000;
 const passport = require("passport");
-const passportSetup = require("./config/passport-setup");
+require("./config/passport-setup");
 const session = require("express-session");
 const authRoutes = require("./routes/auth-routes");
 const mongoose = require("mongoose");
@@ -27,10 +27,13 @@ app.use(
 // parse cookies
 app.use(cookieParser());
 
+// use express session
+
 // initalize passport
 app.use(passport.initialize());
 // deserialize cookie from the browser
 app.use(passport.session());
+app.use(session({ secret: 'whsdf84uy0ru0fwf08wuf', resave: true, saveUninitialized: true }));
 
 // set up cors to allow us to accept requests from our client
 app.use(

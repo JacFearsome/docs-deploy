@@ -21,4 +21,4 @@ nodemon server.js
 - [twitter oauth react app GH](https://github.com/leannezhang/twitter-authentication)
 - [HTTP requests with axios](https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/)
 - [Blueprintjs](https://blueprintjs.com/docs/#blueprint)
-- [passport GH server with templating example](https://github.com/jaredhanson/passport-github)
+- [passport GH server with templating example](https://github.com/cfsghost/passport-github/tree/master/examples/login)
