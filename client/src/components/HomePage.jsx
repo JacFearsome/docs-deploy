@@ -65,6 +65,9 @@ class HomePage extends React.Component {
                             generateMarkdownPreview={false}
                         />
                     </div>
+                    <div className="column preview">
+                        <ReactMarkdown className="markdown-body" source={this.state.file} />
+                    </div>
             </div>
         </div>
         );

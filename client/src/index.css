@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
@@ -22,7 +23,7 @@ a {
 
 .sidenav-1 {
   height: 50%; /* Full-height: remove this if you want "auto" height */
-  width: 17%; /* Set the width of the sidebar */
+  width: 18%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -34,7 +35,7 @@ a {
 }
 .sidenav-2 {
   height: 50%; /* Full-height: remove this if you want "auto" height */
-  width: 17%; /* Set the width of the sidebar */
+  width: 18%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   bottom: 0; /* Stay at the bottom */
@@ -50,11 +51,13 @@ a {
 
 .preview {
   padding: 10px;
+  overflow: scroll;
+  max-height: 900px;
 }
 
 .column {
   float: left;
-  width: 40%;
+  width: 41%;
 }
 
 /* Clear floats after the columns */
@@ -66,6 +69,6 @@ a {
 
 .row {
   position: absolute;
-  left: 17%;
+  left: 18%;
   width: 100%;
 }
