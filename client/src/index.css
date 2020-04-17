@@ -19,3 +19,31 @@ code {
 a {
   text-decoration: none;
 }
+
+.sidenav-1 {
+  height: 50%; /* Full-height: remove this if you want "auto" height */
+  width: 300px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  margin-top: 50px;
+  border: 1px solid #F8F8F2;
+}
+.sidenav-2 {
+  height: 50%; /* Full-height: remove this if you want "auto" height */
+  width: 300px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  bottom: 0; /* Stay at the bottom */
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  margin-top: 0px;
+  border: 1px solid #F8F8F2;
+}
+.repo-table {
+  width: 100%;
+}

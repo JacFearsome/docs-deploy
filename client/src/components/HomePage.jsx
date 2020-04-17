@@ -1,4 +1,5 @@
 import Header from "./Header";
+import RepoList from "./RepoList";
 import PropTypes from "prop-types";
 import React from 'react';
 import {
@@ -19,10 +20,8 @@ import {
     InputGroup,
     HTMLTable,
     Dialog,
+    H3,
 } from "@blueprintjs/core";
-
-// Constants
-import * as constants from '../Constants';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -38,7 +37,12 @@ class HomePage extends React.Component {
         return (
         <div>
             <Header />
-            
+            <div className="sidenav-1">
+                <RepoList />
+            </div>
+            <div className="sidenav-2">
+                <H3>tree view</H3>
+            </div>
         </div>
         );
     }
