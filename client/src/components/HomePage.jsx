@@ -1,5 +1,3 @@
-import Header from "./Header";
-import RepoList from "./RepoList";
 import PropTypes from "prop-types";
 import React from 'react';
 import {
@@ -22,6 +20,9 @@ import {
     Dialog,
     H3,
 } from "@blueprintjs/core";
+import Header from "./Header";
+import RepoList from "./RepoList";
+import TreeView from "./TreeView";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class HomePage extends React.Component {
                 <RepoList />
             </div>
             <div className="sidenav-2">
-                <H3>tree view</H3>
+                <TreeView />
             </div>
         </div>
         );
