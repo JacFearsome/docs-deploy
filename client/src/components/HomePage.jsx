@@ -1,5 +1,8 @@
-import PropTypes from "prop-types";
 import React from 'react';
+import PropTypes from "prop-types";
+import ReactMarkdown from 'react-markdown';
+import ReactMde from "react-mde";
+import * as Showdown from "showdown";
 import {
     Alignment,
     Button,
@@ -23,26 +26,45 @@ import {
 import Header from "./Header";
 import RepoList from "./RepoList";
 import TreeView from "./TreeView";
+import "react-mde/lib/styles/css/react-mde-all.css";
+import 'github-markdown-css/github-markdown.css';
 
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            file: "",
         }
     }
 
     componentDidMount() {
     }
 
+    onChange = (newValue) => {
+        this.setState({ file: newValue });
+    }
+
     render() {
         return (
         <div>
             <Header />
-            <div className="sidenav-1">
-                <RepoList />
+            <div className="sidenav">
+                <div className="sidenav-1">
+                    <RepoList />
+                </div>
+                <div className="sidenav-2">
+                    <TreeView />
+                </div>
             </div>
-            <div className="sidenav-2">
-                <TreeView />
+            <div className="row">
+                    <div className="column">
+                        <ReactMde
+                            value={this.state.file}
+                            onChange={this.onChange}
+                            minEditorHeight="800px"
+                            generateMarkdownPreview={false}
+                        />
+                    </div>
             </div>
         </div>
         );
