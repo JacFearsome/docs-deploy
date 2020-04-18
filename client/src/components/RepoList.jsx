@@ -27,19 +27,6 @@ import {
 export default class RepoList extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            list: [
-                {
-                    name: "doc-deploy",
-                    url: "https://github.com/JacFearsome/doc-deploy"
-                },
-                {
-                    name: "jrussell-md",
-                    url: "https://github.com/JacFearsome/jrussell-md"
-                }
-            ]
-        }
     }
 
   render() {
@@ -51,12 +38,12 @@ export default class RepoList extends Component {
                     <th>Actions</th>
                 </thead>
                 <tbody>
-                {this.state.list.map((repo, index) => (
-                    <tr index={index}>
+                {this.props.repoList.map((repo, index) => (
+                    <tr key={index}>
                         <td>
                         <AnchorButton
                             minimal={true}
-                            href={repo.url}
+                            href={repo.html_url}
                             rightIcon="share"
                             target="_blank"
                             text={repo.name}

@@ -10,7 +10,7 @@ import {
     NavbarHeading
 } from "@blueprintjs/core";
 
-class App extends React.Component {
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
     
@@ -23,14 +23,9 @@ class App extends React.Component {
             <Navbar.Group align={Alignment.LEFT}>
                 <Navbar.Heading>Doc Deploy</Navbar.Heading>
                 <Navbar.Divider />
-                <Link to="/">
-                    <Button className="bp3-minimal" icon="home" text="Home" />
-                </Link>
             </Navbar.Group>
         </Navbar>
       </div>
     );
   }
 }
-
-export default App;
