@@ -25,6 +25,7 @@ import {
 } from "@blueprintjs/core";
 import Header from "./Header";
 import RepoList from "./RepoList";
+import TreeView from "./TreeView";
 
 class MarkdownPage extends React.Component {
     constructor(props) {
@@ -48,6 +49,9 @@ class MarkdownPage extends React.Component {
             <div className="sidenav">
                 <div className="sidenav-1">
                     <RepoList />
+                </div>
+                <div className="sidenav-2">
+                    <TreeView />
                 </div>
             </div>
         </div>
