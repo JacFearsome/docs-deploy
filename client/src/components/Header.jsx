@@ -24,9 +24,6 @@ class App extends React.Component {
                 <Navbar.Heading>Doc Deploy</Navbar.Heading>
                 <Navbar.Divider />
                 <Link to="/">
-                    <Button className="bp3-minimal" icon="home" text="Home" />
-                </Link>
-                <Link to="/markdown">
                     <Button className="bp3-minimal" icon="document" text="Markdown" />
                 </Link>
                 <Link to="/docute">

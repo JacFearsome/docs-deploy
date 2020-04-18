@@ -24,6 +24,7 @@ import {
     H3,
 } from "@blueprintjs/core";
 import Header from "./Header";
+import RepoList from "./RepoList";
 
 class MarkdownPage extends React.Component {
     constructor(props) {
@@ -44,7 +45,11 @@ class MarkdownPage extends React.Component {
         return (
         <div>
             <Header />
-            <H3>Markdown</H3>
+            <div className="sidenav">
+                <div className="sidenav-1">
+                    <RepoList />
+                </div>
+            </div>
         </div>
         );
     }
