@@ -25,7 +25,7 @@ import {
 } from "@blueprintjs/core";
 import Header from "./Header";
 
-class HomePage extends React.Component {
+class DocutePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,10 +44,10 @@ class HomePage extends React.Component {
         return (
         <div>
             <Header />
-            <H3>Home</H3>
+            <H3>Docute</H3>
         </div>
         );
     }
 }
 
-export default HomePage;
+export default DocutePage;

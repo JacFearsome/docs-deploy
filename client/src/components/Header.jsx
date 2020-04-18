@@ -26,6 +26,12 @@ class App extends React.Component {
                 <Link to="/">
                     <Button className="bp3-minimal" icon="home" text="Home" />
                 </Link>
+                <Link to="/markdown">
+                    <Button className="bp3-minimal" icon="document" text="Markdown" />
+                </Link>
+                <Link to="/docute">
+                    <Button className="bp3-minimal" icon="cog" text="Docute" />
+                </Link>
             </Navbar.Group>
         </Navbar>
       </div>
