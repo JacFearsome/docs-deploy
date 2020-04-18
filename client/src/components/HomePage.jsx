@@ -24,8 +24,6 @@ import {
     H3,
 } from "@blueprintjs/core";
 import Header from "./Header";
-import RepoList from "./RepoList";
-import TreeView from "./TreeView";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import 'github-markdown-css/github-markdown.css';
 
@@ -48,27 +46,6 @@ class HomePage extends React.Component {
         return (
         <div>
             <Header />
-            <div className="sidenav">
-                <div className="sidenav-1">
-                    <RepoList />
-                </div>
-                <div className="sidenav-2">
-                    <TreeView />
-                </div>
-            </div>
-            <div className="row">
-                    <div className="column">
-                        <ReactMde
-                            value={this.state.file}
-                            onChange={this.onChange}
-                            minEditorHeight="800px"
-                            generateMarkdownPreview={false}
-                        />
-                    </div>
-                    <div className="column preview">
-                        <ReactMarkdown className="markdown-body" source={this.state.file} />
-                    </div>
-            </div>
         </div>
         );
     }
