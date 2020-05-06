@@ -24,10 +24,10 @@ class App extends React.Component {
                 <Navbar.Heading>Doc Deploy</Navbar.Heading>
                 <Navbar.Divider />
                 <Link to="/">
-                    <Button className="bp3-minimal" icon="document" text="Markdown" />
+                    <Button className="bp3-minimal" icon="document" text="Files" />
                 </Link>
-                <Link to="/docute">
-                    <Button className="bp3-minimal" icon="cog" text="Docute" />
+                <Link to="/config">
+                    <Button className="bp3-minimal" icon="cog" text="Config" />
                 </Link>
             </Navbar.Group>
         </Navbar>
