@@ -1,6 +1,6 @@
 import React from "react";
 import MarkdownPage from "./components/MarkdownPage";
-import DocutePage from "./components/DocutePage";
+import ConfigPage from "./components/ConfigPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export const AppRouter = () => {
@@ -8,7 +8,7 @@ export const AppRouter = () => {
     <Router>
       <div>
         <Route exact path="/" component={MarkdownPage} />
-        <Route exact path="/docute" component={DocutePage} />
+        <Route exact path="/config" component={ConfigPage} />
       </div>
     </Router>
   );
