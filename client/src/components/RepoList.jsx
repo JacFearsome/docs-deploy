@@ -27,19 +27,6 @@ import {
 export default class RepoList extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            list: [
-                {
-                    name: "doc-deploy",
-                    url: "https://github.com/JacFearsome/doc-deploy"
-                },
-                {
-                    name: "jrussell-md",
-                    url: "https://github.com/JacFearsome/jrussell-md"
-                }
-            ]
-        }
     }
 
   render() {
@@ -47,27 +34,34 @@ export default class RepoList extends Component {
         <div>
             <HTMLTable className="repo-table" bordered={true} striped={true}>
                 <thead>
-                    <th>Name</th>
-                    <th>Actions</th>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {this.state.list.map((repo, index) => (
-                    <tr index={index}>
-                        <td>
-                        <AnchorButton
-                            minimal={true}
-                            href={repo.url}
-                            rightIcon="share"
-                            target="_blank"
-                            text={repo.name}
-                        /></td>
-                        <td>
-                            <ButtonGroup minimal={true}>
-                                <Button>Load</Button>
-                            </ButtonGroup>
-                        </td>
-                    </tr>
-                ))}
+                {this.props.repoList.map((repo, index) => {     
+                    let button; 
+                    if (this.props.loaded == repo.name) {
+                        button = <Button minimal={true}>Active</Button>;
+                    } else {
+                        button = <Button minimal={true} onClick={() => this.props.loadFiles(repo.owner.login, repo.name)}>Load</Button>;
+                    }
+                    return (
+                        <tr key={index}>
+                            <td>
+                            <AnchorButton
+                                minimal={true}
+                                href={repo.html_url}
+                                icon="git-repo"
+                                target="_blank"
+                                text={repo.name}
+                            /></td>
+                            <td>
+                                {button}
+                            </td>
+                        </tr>
+                    )})}
                 </tbody>
             </HTMLTable>
         </div>

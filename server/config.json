@@ -1,0 +1,8 @@
+{
+    "port" : "3003",
+    "redisHost": "localhost",
+    "clientId": "59629382deeb4711afa2",
+    "clientSecret": "d04b13f5603cef4757e438813852d4b9fce19bd4",
+    "clientOrigin": "http://localhost:3000",
+    "redisSecret": "23r9r76ny34w65q432q5w336wh6n56wn3t35636n35n73"
+}

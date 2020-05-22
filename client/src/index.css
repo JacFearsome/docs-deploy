@@ -74,9 +74,9 @@ a {
 }
 
 .action-button {
-  width: 100%;
+  width: 300px;
   margin: auto;
-  padding: 5%;
+  padding: 10px;
   display: block;
   text-align: center;
 }
@@ -84,5 +84,4 @@ a {
 .editor {
   display: block;
   position: fixed;
-  left: 18%;
 }
