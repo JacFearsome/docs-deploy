@@ -4,7 +4,7 @@ This project is an attempt to create an interface to allow you to quickly deploy
 To start the client and see the progress of the development, run these commands:
 ```bash
 git clone https://github.com/JacFearsome/doc-deploy.git
-cd doc-deploy
+cd doc-deploy/client
 npm install
 npm start
 ```
