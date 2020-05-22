@@ -70,50 +70,49 @@ class App extends React.Component {
             mode: "write",
             editDisabled: true,
         }
-        //this.loadIndex = this.loadIndex.bind(this);
     }
 
     componentDidMount() {
 
     }
-
+    // event for ace editor load
     onLoad = (editor) => {
     }
-    handleMoveOpen = () => this.setState({ isConfirmOpen: true });
-    handleMoveCancel = () => this.setState({ isConfirmOpen: false });
-  
-    onIndexChange = (newValue) => {
-      this.setState({ indexFile: newValue });
-    }
-
+    // open and cancel functions for switch file confirm dialog
+    handleConfirmOpen = () => this.setState({ isConfirmOpen: true });
+    handleConfirmCancel = () => this.setState({ isConfirmOpen: false });
+    // show notification function
     showMessage = (msg) => {
       let notification = AppToaster.show({ message: msg });
       setTimeout(() => {
         AppToaster.dismiss(notification);
       }, 3000);
     }
-
+    // event for changing of active file
     onChange = (newValue) => {
         this.setState({ file: newValue });
     }
-
+    
+    // open function for config sidebar
     handleOpen = () => {
         this.setState({ isOpen: true });
         this.loadIndex()
     };
-  
+    // close function for config sidebar
     handleClose = (event) => {
         this.setState({ isOpen: false, filename: "", sha: "", filepath: "" });
     };
-
+    // handle form input change, update the state based on the changed input value
     handleChange = name => event => {
       this.setState({
         [name]: event.target.value,
       });
     };
-
+    // primary callback function triggered after successfull oauth login
     handleData = (data) => {
+        // set access token, user object, and owner property
         this.setState({ accessToken: data.access_token, user: data.user, owner: data.user.login });
+        // get list of repositories
         constants.instance.get(`/user/repos`, {
             headers: {
                 "Authorization": `token ${this.state.accessToken}`,
@@ -124,9 +123,12 @@ class App extends React.Component {
             this.showMessage(`Logged in as ${data.user.login}`)
           })
     }
+    // callback for loading a repository
     loadDocs = (owner, repo) => {
+      // reset state
       this.setState({file: "", indexFile: "", repo: "", sha: "", filename: "", filepath: ""})
       let nodes = [];
+      // get list of repo files and folders, then create tree object for treeview component
       constants.instance.get(`/repos/${owner}/${repo}/contents/docs`, {
           headers: {
               "Authorization": `token ${this.state.accessToken}`,
@@ -150,6 +152,7 @@ class App extends React.Component {
                   hasCaret: true,
                   icon: "folder-open",
                   label: item.name,
+                  // call travelFolder to recursively search folders
                   childNodes: this.travelFolder(owner, repo, item.path)
               }
               nodes.push(nodeObj);
@@ -161,6 +164,7 @@ class App extends React.Component {
           this.showMessage(`No docs folder found. Please look at Getting Started.`);
         });
     }
+    // recursive folder search function for building file and folder list
     travelFolder = (owner, repo, path) => {
       let nodes = [];
       constants.instance.get(`/repos/${owner}/${repo}/contents/${path}`, {
@@ -172,7 +176,6 @@ class App extends React.Component {
           for (let i in res.data) {
             let item = res.data[i];
             if (item.type === "file") {
-              if (item.name.indexOf(".md") !== -1) {
                 let nodeObj = {
                     id: item.path,
                     hasCaret: false,
@@ -180,7 +183,6 @@ class App extends React.Component {
                     label: item.name,
                 }
                 nodes.push(nodeObj);
-              }
             } else if (item.type === "dir") {
               let nodeObj = {
                   id: item.path,
@@ -195,20 +197,26 @@ class App extends React.Component {
         })
         return nodes;
     }
+    // start loading file, set current path then confirm file switch
     loadFile = (path) => {
       this.setState({currPath: path});
-      this.handleMoveOpen()
+      this.handleConfirmOpen()
     }
+    // execute file load
     execFileLoad = () => {
       let path = this.state.currPath;
+      // close confirm dialog
       this.setState({isConfirmOpen: false});
+      // load file details from github
       constants.instance.get(`/repos/${this.state.owner}/${this.state.repo}/contents/${path}`, {
         headers: {
             "Authorization": `token ${this.state.accessToken}`,
             "Content-Type": "application/json"
         }})
       .then(res => {
+        // load raw content of github file
         axios.get(res.data.download_url).then((response) => {
+          // if it is index.html open the config sidebar, otherwise assume it is markdown
           if (res.data.name == "index.html") {
             this.handleOpen();
             this.setState({indexFile: response.data, sha: res.data.sha, filename: res.data.name, filepath: path});
@@ -219,6 +227,7 @@ class App extends React.Component {
         });
       })
     }
+    // save current file
     saveFile = () => {
       this.setState({editDisabled: true});
       constants.instance.put(`/repos/${this.state.owner}/${this.state.repo}/contents/${this.state.filepath}`, 
@@ -241,26 +250,7 @@ class App extends React.Component {
           //this.loadDocs(this.state.owner, this.state.repo);
         })
     }
-    newFile = (path) => {
-      constants.instance.put(`/repos/${this.state.owner}/${this.state.repo}/contents/${this.state.filepath}`, 
-          {
-            "name": this.state.filepath,
-            "message": this.state.filepath,
-            "committer": {
-              "name": this.state.user.name,
-              "email": this.state.user.email
-            },
-            "content": new Buffer(this.state.file).toString('base64'),
-            "sha": this.state.sha
-          }, {
-          headers: {
-              "Authorization": `token ${this.state.accessToken}`,
-              "Content-Type": "application/json"
-          }})
-        .then(res => {
-          this.showMessage(`Saved file: ${this.state.filepath}`)
-        })
-    }
+    // not working
     deleteFile = () => {
       constants.instance.delete(`/repos/${this.state.owner}/${this.state.repo}/contents/${this.state.filepath}`, 
           {
@@ -277,6 +267,11 @@ class App extends React.Component {
           this.showMessage(`Error deleting ${this.state.filepath}`)
         })
     }
+    // event for changing of index.html value
+    onIndexChange = (newValue) => {
+      this.setState({ indexFile: newValue });
+    }
+    // loads the index file
     loadIndex = () => {
       constants.instance.get(`/repos/${this.state.owner}/${this.state.repo}/contents/docs/index.html`, {
           headers: {
@@ -289,6 +284,7 @@ class App extends React.Component {
           });
         })
     }
+    // saves the index file
     saveIndexFile = () => {
       constants.instance.put(`/repos/${this.state.owner}/${this.state.repo}/contents/docs/index.html`, 
           {
@@ -309,9 +305,11 @@ class App extends React.Component {
           this.showMessage(`Saved index.html`)
         })
     }
+    // adds default docsify config to index.html
     loadDefaultIndex = () => {
       this.setState({indexFile: constants.defaultIndex})
     }
+    // view github pages url
     viewGH = () => {
       constants.instance.get(`/repos/${this.state.owner}/${this.state.repo}/pages`, {
           headers: {
@@ -322,6 +320,7 @@ class App extends React.Component {
           window.open(res.data.html_url, "_blank")
         })
     }
+    // build github pages
     buildGH = () => {
       constants.instance.post(`/repos/${this.state.owner}/${this.state.repo}/pages/builds`, {}, {
           headers: {
@@ -335,6 +334,7 @@ class App extends React.Component {
           
         })
     }
+    // enable github pages
     enableGH = () => {
       constants.instance.get(`/repos/${this.state.owner}/${this.state.repo}/pages`, {
           headers: {
@@ -363,7 +363,7 @@ class App extends React.Component {
             })
         })
     }
-
+    // edit the current path
     editPath = () => {
       if (this.state.editDisabled == true) {
         this.setState({editDisabled: false});
@@ -496,7 +496,7 @@ class App extends React.Component {
                     icon="exchange"
                     intent={Intent.DANGER}
                     isOpen={this.state.isConfirmOpen}
-                    onCancel={this.handleMoveCancel}
+                    onCancel={this.handleConfirmCancel}
                     onConfirm={this.execFileLoad}
                 >
                 <p>
